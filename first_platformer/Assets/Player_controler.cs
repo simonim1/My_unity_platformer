@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Player_controler : MonoBehaviour
 {
-    public Rigidbody2D player;
-    int jump_thresh_hold = 0;
+    public Rigidbody2D player; 
+    public Animator anim;
+
+    private int jump_thresh_hold = 0;
+    private string running_anim_param = "running";
+  
 
     private void Update()
     {
@@ -14,23 +18,26 @@ public class Player_controler : MonoBehaviour
             player.velocity = new Vector2(-5, player.velocity.y);
             jump_thresh_hold = 0;
             transform.localScale = new Vector2(-1, 1);
-            //TODO: find a way to change the animation with movement
-        }
-        if(Input.GetKey(KeyCode.RightArrow))
+            anim.SetBool(running_anim_param, true);
+           
+        }else if(Input.GetKey(KeyCode.RightArrow))
         {
             player.velocity = new Vector2(5, player.velocity.y);
             jump_thresh_hold = 0;
             transform.localScale = new Vector2(1, 1);
-            //TODO: change animation
+            anim.SetBool(running_anim_param, true);
 
-        }
-        if(Input.GetKey(KeyCode.UpArrow) && jump_thresh_hold<2)
+        }else if(Input.GetKey(KeyCode.UpArrow) && jump_thresh_hold<=2)
         {
-
-            //Need to figure out how to limit the up arrow count. 
-            //if user holds the up arrow the character is flying
-            player.velocity = new Vector2(player.velocity.x, 10f);
+            
+            player.velocity = new Vector2(player.velocity.x, 6f);
             jump_thresh_hold += 1;
         }
+        else
+        {
+            anim.SetBool(running_anim_param, false);
+        }
+        //default idel 
+
     }
 }
