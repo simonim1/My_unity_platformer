@@ -13,12 +13,14 @@ public class Player_controler : MonoBehaviour
         {
             player.velocity = new Vector2(-5, player.velocity.y);
             jump_thresh_hold = 0;
+            transform.localScale = new Vector2(-1, 1);
             //TODO: find a way to change the animation with movement
         }
         if(Input.GetKey(KeyCode.RightArrow))
         {
             player.velocity = new Vector2(5, player.velocity.y);
             jump_thresh_hold = 0;
+            transform.localScale = new Vector2(1, 1);
             //TODO: change animation
 
         }
